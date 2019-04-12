@@ -23,6 +23,16 @@ var taskListSchema = mongo.Schema({
 //Model da aplicação
 var Model = mongo.model('Tarefas', taskListSchema);
 
+//GET - Retorna todos os registros existentes no banco
+app.get("/api/tarefa", function (req, res) {
+	Model.find(function(err, todos) {
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(todos);
+		}
+	})
+});
 
 //GET param - Retorna o registro correspondente da ID informada
 app.get("/api/tarefa/:descricao?", function (req, res) {
